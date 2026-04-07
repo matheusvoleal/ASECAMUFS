@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEX | Relatório Financeiro — ASECAMUFS | 1º Trimestre 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --navy:       #0e2a6c;
+    --navy-med:   #1a3d8a;
+    --navy-light: #2a5ac4;
+    --navy-dim:   #07183d;
+    --navy-bg:    #e8edf8;
+    --navy-line:  #c0cce8;
+    --gold:       #c49a1a;
+    --gold-l:     #fef9e7;
+    --green:      #1a6b3a;
+    --green-l:    #d4edda;
+    --red:        #8b1a1a;
+    --red-l:      #f8d7da;
+    --white:      #ffffff;
+    --txt-dark:   #0a1a3a;
+    --txt-mid:    #3a4e70;
+    --txt-light:  #6a80a8;
+    --surface:    #f4f7fd;
+    --radius:     10px;
+    --shadow:     0 4px 24px rgba(14,42,108,.10);
+    --shadow-lg:  0 12px 48px rgba(14,42,108,.18);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--surface);
+    color: var(--txt-dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ─── HEADER ─────────────────────────────── */
+  .header {
+    background: linear-gradient(135deg, var(--navy-dim) 0%, var(--navy) 55%, var(--navy-med) 100%);
+    padding: 0 28px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(7,24,61,.5);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 62px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .logo-area { display: flex; align-items: center; gap: 12px; }
+  .logo-text .brand { font-size: 18px; font-weight: 700; color: #fff; letter-spacing: 2px; }
+  .logo-text .sub   { font-size: 8px; color: rgba(255,255,255,.5); letter-spacing: 3px; text-transform: uppercase; }
+  .header-title { text-align: center; }
+  .header-title .main   { font-size: 13px; font-weight: 600; color: #fff; letter-spacing: .5px; }
+  .header-title .period { font-size: 10px; color: rgba(255,255,255,.5); letter-spacing: 1px; }
+  .header-badge {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 10px;
+    color: rgba(255,255,255,.7);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ─── NAV ────────────────────────────────── */
+  .nav-bar {
+    background: var(--white);
+    border-bottom: 2px solid var(--navy-line);
+    position: sticky;
+    top: 62px;
+    z-index: 99;
+    box-shadow: 0 2px 8px rgba(14,42,108,.06);
+  }
+  .nav-inner {
+    display: flex;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 28px;
+    gap: 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-inner::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    padding: 14px 18px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--txt-light);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: all .2s;
+    letter-spacing: .3px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    user-select: none;
+  }
+  .nav-tab:hover { color: var(--navy); }
+  .nav-tab.active { color: var(--navy); border-bottom-color: var(--navy); }
+  .nav-tab .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--navy-light); opacity: 0; transition: opacity .2s; }
+  .nav-tab.active .dot { opacity: 1; }
+
+  /* ─── CONTENT ────────────────────────────── */
+  .content { max-width: 1100px; margin: 0 auto; padding: 28px 28px 60px; }
+  .section { display: none; animation: fadeUp .35s ease; }
+  .section.active { display: block; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+
+  /* ─── KPI CARDS ──────────────────────────── */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 28px; }
+  @media(max-width:800px){ .kpi-grid { grid-template-columns: repeat(2,1fr); } }
+  .kpi-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 20px 18px 16px;
+    box-shadow: var(--shadow);
+    border-top: 3px solid var(--navy);
+    position: relative;
+    overflow: hidden;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .kpi-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+  .kpi-card::before { content:''; position:absolute; right:-16px; top:-16px; width:70px; height:70px; border-radius:50%; opacity:.06; background:var(--navy); }
+  .kpi-card.green  { border-top-color: var(--green); } .kpi-card.green::before  { background:var(--green); }
+  .kpi-card.red    { border-top-color: var(--red); }   .kpi-card.red::before    { background:var(--red); }
+  .kpi-card.gold   { border-top-color: var(--gold); }  .kpi-card.gold::before   { background:var(--gold); }
+  .kpi-label { font-size:10px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--txt-light); margin-bottom:8px; }
+  .kpi-value { font-family:'DM Mono',monospace; font-size:15px; font-weight:500; color:var(--txt-dark); line-height:1.2; }
+  .kpi-card.green .kpi-value { color:var(--green); }
+  .kpi-card.red   .kpi-value { color:var(--red); }
+  .kpi-card.gold  .kpi-value { color:var(--gold); }
+  .kpi-sub { font-size:10px; color:var(--txt-light); margin-top:4px; }
+
+  /* ─── SECTION HEADER ─────────────────────── */
+  .sec-header { display:flex; align-items:center; gap:10px; margin-bottom:14px; padding-bottom:10px; border-bottom:1.5px solid var(--navy-line); }
+  .sec-header .bar { width:3px; height:22px; background:var(--navy); border-radius:2px; }
+  .sec-header .bar.gold  { background:var(--gold); }
+  .sec-header .bar.green { background:var(--green); }
+  .sec-header .bar.red   { background:var(--red); }
+  .sec-header h2 { font-size:13px; font-weight:700; color:var(--navy); letter-spacing:.5px; text-transform:uppercase; }
+
+  /* ─── TABLE ──────────────────────────────── */
+  .table-wrap { overflow-x:auto; border-radius:var(--radius); box-shadow:var(--shadow); margin-bottom:24px; }
+  table { width:100%; border-collapse:collapse; background:var(--white); font-size:12px; }
+  thead tr { background:linear-gradient(90deg,var(--navy) 0%,var(--navy-med) 100%); }
+  thead th { padding:11px 14px; text-align:left; color:rgba(255,255,255,.85); font-size:10px; font-weight:600; letter-spacing:1px; text-transform:uppercase; white-space:nowrap; }
+  thead th:not(:first-child) { text-align:right; }
+  tbody tr { border-bottom:1px solid var(--navy-line); transition:background .15s; }
+  tbody tr:hover { background:var(--navy-bg); }
+  tbody tr:last-child { border-bottom:none; }
+  tbody tr.total-row { background:var(--navy-bg); font-weight:700; color:var(--navy); }
+  tbody tr.saldo-row { background:linear-gradient(90deg,#f0f4fb,var(--white)); font-weight:600; }
+  td { padding:10px 14px; color:var(--txt-dark); white-space:nowrap; }
+  td:not(:first-child) { text-align:right; font-family:'DM Mono',monospace; font-size:11.5px; }
+  .val-green { color:var(--green); font-weight:600; }
+  .val-red   { color:var(--red);   font-weight:600; }
+  .val-gold  { color:var(--gold);  font-weight:600; }
+  .val-navy  { color:var(--navy);  font-weight:600; }
+  .tag { display:inline-block; font-size:9px; font-weight:700; padding:2px 7px; border-radius:10px; letter-spacing:.5px; text-transform:uppercase; }
+  .tag-credit { background:var(--green-l); color:var(--green); }
+  .tag-debit  { background:var(--red-l);   color:var(--red); }
+  .tag-warn   { background:var(--gold-l);  color:var(--gold); }
+
+  /* ─── CHARTS ─────────────────────────────── */
+  .chart-row { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:24px; }
+  @media(max-width:700px){ .chart-row { grid-template-columns:1fr; } }
+  .chart-card { background:var(--white); border-radius:var(--radius); padding:20px; box-shadow:var(--shadow); }
+  .chart-title { font-size:11px; font-weight:700; color:var(--navy); letter-spacing:.8px; text-transform:uppercase; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+  .chart-title::before { content:''; width:3px; height:14px; background:var(--gold); border-radius:2px; }
+  .bar-group { margin-bottom:12px; }
+  .bar-label { font-size:10px; color:var(--txt-mid); margin-bottom:4px; display:flex; justify-content:space-between; }
+  .bar-track { height:22px; background:var(--navy-bg); border-radius:4px; overflow:hidden; }
+  .bar-fill { height:100%; border-radius:4px; transition:width 1.2s cubic-bezier(.4,0,.2,1); display:flex; align-items:center; padding-left:8px; min-width:0; }
+  .bar-fill-val { font-family:'DM Mono',monospace; font-size:10px; color:#fff; font-weight:500; white-space:nowrap; overflow:hidden; }
+  .bar-rec  { background:linear-gradient(90deg,#1a6b3a,#2e9955); }
+  .bar-desp { background:linear-gradient(90deg,#8b1a1a,#c44444); }
+  .donut-wrap { display:flex; align-items:center; gap:20px; }
+  .donut-legend { flex:1; }
+  .legend-item { display:flex; align-items:center; gap:8px; margin-bottom:7px; }
+  .legend-dot  { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+  .legend-label { font-size:11px; color:var(--txt-mid); flex:1; }
+  .legend-val   { font-family:'DM Mono',monospace; font-size:11px; font-weight:500; }
+
+  /* ─── MONTH SELECTOR / FILTERS ───────────── */
+  .month-selector { display:flex; gap:8px; margin-bottom:18px; }
+  .month-btn { flex:1; padding:10px; border-radius:8px; border:2px solid var(--navy-line); background:var(--white); font-size:12px; font-weight:600; color:var(--txt-mid); cursor:pointer; text-align:center; transition:all .2s; font-family:'DM Sans',sans-serif; }
+  .month-btn:hover { border-color:var(--navy); color:var(--navy); }
+  .month-btn.active { background:var(--navy); border-color:var(--navy); color:#fff; }
+  .filter-bar { display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; }
+  .filter-btn { padding:6px 14px; border-radius:20px; border:1.5px solid var(--navy-line); background:var(--white); font-size:11px; font-weight:600; color:var(--txt-mid); cursor:pointer; transition:all .2s; font-family:'DM Sans',sans-serif; }
+  .filter-btn:hover { border-color:var(--navy); color:var(--navy); }
+  .filter-btn.active { background:var(--navy); border-color:var(--navy); color:#fff; }
+  .filter-btn.green-f.active { background:var(--green); border-color:var(--green); }
+  .filter-btn.red-f.active   { background:var(--red);   border-color:var(--red); }
+
+  /* ─── DISPONIBILIDADES ───────────────────── */
+  .disp-card { background:var(--white); border-radius:var(--radius); padding:20px; box-shadow:var(--shadow); margin-bottom:24px; }
+  .disp-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:12px; }
+  @media(max-width:700px){ .disp-grid { grid-template-columns:1fr; } }
+  .disp-item { background:var(--surface); border-radius:8px; padding:14px; border-left:3px solid var(--navy); transition:transform .2s; }
+  .disp-item:hover { transform:translateY(-2px); }
+  .disp-item.poupanca { border-left-color:var(--gold); }
+  .disp-item.fundo    { border-left-color:var(--green); }
+  .disp-mes { font-size:10px; font-weight:700; letter-spacing:1px; color:var(--txt-light); text-transform:uppercase; margin-bottom:6px; }
+  .disp-val { font-family:'DM Mono',monospace; font-size:14px; font-weight:500; color:var(--txt-dark); line-height:1.2; }
+  .disp-total-row { background:linear-gradient(135deg,var(--navy-dim),var(--navy)); border-radius:8px; padding:16px; display:flex; justify-content:space-between; align-items:center; margin-top:12px; }
+  .disp-total-label { color:rgba(255,255,255,.65); font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; }
+  .disp-total-val { font-family:'DM Mono',monospace; color:#fff; font-size:16px; font-weight:500; }
+
+  /* ─── NOTAS ──────────────────────────────── */
+  .nota-card { background:var(--white); border-radius:var(--radius); padding:18px 20px; margin-bottom:12px; box-shadow:var(--shadow); border-left:4px solid var(--navy); }
+  .nota-card.critico  { border-left-color:var(--red); }
+  .nota-card.atencao  { border-left-color:var(--gold); }
+  .nota-card.recomend { border-left-color:var(--navy-light); }
+  .nota-header { display:flex; align-items:center; gap:10px; margin-bottom:8px; flex-wrap:wrap; }
+  .nota-badge { font-size:9px; font-weight:700; letter-spacing:1px; padding:3px 9px; border-radius:12px; text-transform:uppercase; }
+  .nb-critico  { background:var(--red-l);   color:var(--red); }
+  .nb-atencao  { background:var(--gold-l);  color:var(--gold); }
+  .nb-info     { background:var(--navy-bg); color:var(--navy); }
+  .nb-recomend { background:#e8eeff;        color:var(--navy-light); }
+  .nota-title  { font-size:13px; font-weight:700; color:var(--txt-dark); flex:1; }
+  .nota-comp   { font-size:10px; color:var(--txt-light); font-weight:600; }
+  .nota-body   { font-size:12px; color:var(--txt-mid); line-height:1.65; }
+
+  /* ─── FOOTER ─────────────────────────────── */
+  .footer { background:var(--navy-dim); color:rgba(255,255,255,.4); text-align:center; padding:18px; font-size:10px; letter-spacing:1px; text-transform:uppercase; }
+  .footer a { color:rgba(255,255,255,.4); text-decoration:none; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="logo-area">
+      <svg width="38" height="38" viewBox="0 0 502 544" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ng" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#600fb4"/>
+            <stop offset="50%" stop-color="#8b1a6b"/>
+            <stop offset="100%" stop-color="#b32519"/>
+          </linearGradient>
+        </defs>
+        <path d="M60 480 L60 64 C60 28 88 8 118 24 L285 175 L285 64 C285 28 318 8 345 28 L435 100 C458 116 458 150 435 166 L435 480 C435 516 407 536 377 520 L210 369 L210 480 C210 516 177 536 150 516 L70 444 Z" fill="url(#ng)"/>
+      </svg>
+      <div class="logo-text">
+        <div class="brand">NEX</div>
+        <div class="sub">Assessoria Empresarial</div>
+      </div>
+    </div>
+    <div class="header-title">
+      <div class="main">Relatório Financeiro Gerencial</div>
+      <div class="period">ASECAMUFS · 1º Trimestre 2026</div>
+    </div>
+    <div class="header-badge">Confidencial</div>
+  </div>
+</header>
+
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <div class="nav-tab active" onclick="showSection('dashboard')"><span class="dot"></span>Dashboard</div>
+    <div class="nav-tab" onclick="showSection('drg')"><span class="dot"></span>DRG</div>
+    <div class="nav-tab" onclick="showSection('conciliacao')"><span class="dot"></span>Conciliação</div>
+    <div class="nav-tab" onclick="showSection('disponibilidades')"><span class="dot"></span>Disponibilidades</div>
+    <div class="nav-tab" onclick="showSection('notas')"><span class="dot"></span>Notas & Alertas</div>
+  </div>
+</nav>
+
+<div class="content">
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="section active">
+  <div class="kpi-grid">
+    <div class="kpi-card green">
+      <div class="kpi-label">Receitas Totais</div>
+      <div class="kpi-value">R$ 114.697,00</div>
+      <div class="kpi-sub">Jan + Fev + Mar · 2026</div>
+    </div>
+    <div class="kpi-card red">
+      <div class="kpi-label">Despesas Totais</div>
+      <div class="kpi-value">R$ 115.916,50</div>
+      <div class="kpi-sub">Jan + Fev + Mar · 2026</div>
+    </div>
+    <div class="kpi-card red">
+      <div class="kpi-label">Resultado Trimestral</div>
+      <div class="kpi-value">(R$ 1.219,50)</div>
+      <div class="kpi-sub">Déficit acumulado</div>
+    </div>
+    <div class="kpi-card gold">
+      <div class="kpi-label">Disponível Jan/26</div>
+      <div class="kpi-value">R$ 222.608,92</div>
+      <div class="kpi-sub">C/C + Poupança + Fundo</div>
+    </div>
+  </div>
+
+  <div class="chart-row">
+    <div class="chart-card">
+      <div class="chart-title">Receitas vs Despesas por Mês</div>
+      <div id="bar-chart"></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-title">Composição das Despesas</div>
+      <div class="donut-wrap">
+        <svg width="110" height="110" viewBox="0 0 110 110" id="donut-svg"></svg>
+        <div class="donut-legend" id="donut-legend"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-header"><div class="bar"></div><h2>Resumo Financeiro Mensal</h2></div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Indicador</th><th>Janeiro/2026</th><th>Fevereiro/2026</th><th>Março/2026</th><th>Total Trim.</th></tr></thead>
+      <tbody>
+        <tr class="saldo-row"><td>Saldo Inicial (C/C)</td><td class="val-navy">R$ 21.489,34</td><td class="val-navy">R$ 19.811,09</td><td class="val-navy">R$ 10.503,99</td><td>—</td></tr>
+        <tr><td>(+) Total de Receitas</td><td class="val-green">R$ 34.180,08</td><td class="val-green">R$ 36.198,67</td><td class="val-green">R$ 44.319,25</td><td class="val-green">R$ 114.697,00</td></tr>
+        <tr><td>(–) Total de Despesas</td><td class="val-red">R$ 35.858,33</td><td class="val-red">R$ 44.676,58</td><td class="val-red">R$ 35.381,59</td><td class="val-red">R$ 115.916,50</td></tr>
+        <tr class="total-row"><td>(=) Resultado do Mês</td><td class="val-red">(R$ 1.678,25)</td><td class="val-red">(R$ 8.477,91)</td><td class="val-green">R$ 8.937,66</td><td class="val-red">(R$ 1.219,50)</td></tr>
+        <tr class="saldo-row"><td>Saldo Final (C/C)</td><td class="val-navy">R$ 19.811,09</td><td class="val-navy">R$ 11.333,18</td><td class="val-navy">R$ 19.441,65</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- DRG -->
+<div id="drg" class="section">
+  <div class="sec-header"><div class="bar green"></div><h2>Receitas Operacionais</h2></div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Descrição</th><th>Jan/2026</th><th>Fev/2026</th><th>Mar/2026</th><th>Total</th></tr></thead>
+      <tbody>
+        <tr><td>Contribuições dos Associados</td><td class="val-green">R$ 12.317,62</td><td class="val-green">R$ 14.614,52</td><td class="val-green">R$ 21.878,00</td><td class="val-green">R$ 48.810,14</td></tr>
+        <tr><td>Repasse Câmara Municipal</td><td class="val-green">R$ 16.950,79</td><td class="val-green">R$ 16.463,12</td><td class="val-green">R$ 14.770,82</td><td class="val-green">R$ 48.184,73</td></tr>
+        <tr><td>Receitas de Aluguel</td><td class="val-green">R$ 3.356,10</td><td class="val-green">R$ 3.356,10</td><td class="val-green">R$ 3.533,98</td><td class="val-green">R$ 10.246,18</td></tr>
+        <tr><td>Outros Recebimentos</td><td class="val-green">R$ 1.555,57</td><td class="val-green">R$ 1.555,57</td><td class="val-green">R$ 1.555,57</td><td class="val-green">R$ 4.666,71</td></tr>
+        <tr><td>Cobrança Inativos</td><td>—</td><td class="val-green">R$ 209,36</td><td class="val-green">R$ 209,36</td><td class="val-green">R$ 418,72</td></tr>
+        <tr><td>Resgate Aplicação Financeira</td><td>—</td><td>—</td><td class="val-green">R$ 2.371,52</td><td class="val-green">R$ 2.371,52</td></tr>
+        <tr class="total-row"><td>(=) TOTAL DE RECEITAS</td><td class="val-green">R$ 34.180,08</td><td class="val-green">R$ 36.198,67</td><td class="val-green">R$ 44.319,25</td><td class="val-green">R$ 114.697,00</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-header" style="margin-top:24px"><div class="bar red"></div><h2>Despesas Operacionais</h2></div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Descrição</th><th>Jan/2026</th><th>Fev/2026</th><th>Mar/2026</th><th>Total</th></tr></thead>
+      <tbody>
+        <tr><td>Plano de Saúde – Unimed</td><td class="val-red">R$ 30.142,69</td><td class="val-red">R$ 28.235,10</td><td class="val-red">R$ 25.321,93</td><td class="val-red">R$ 83.699,72</td></tr>
+        <tr><td>Coparticipação Unimed</td><td class="val-red">R$ 301,85</td><td class="val-red">R$ 479,10</td><td class="val-red">R$ 1.869,33</td><td class="val-red">R$ 2.650,28</td></tr>
+        <tr><td>Plano Odontológico – Uniodonto</td><td class="val-red">R$ 452,88</td><td class="val-red">R$ 452,88</td><td class="val-red">R$ 452,88</td><td class="val-red">R$ 1.358,64</td></tr>
+        <tr><td>Copart. Odontosystem</td><td class="val-red">R$ 501,41</td><td>—</td><td class="val-red">R$ 955,53</td><td class="val-red">R$ 1.456,94</td></tr>
+        <tr><td>Despesas de Condomínio</td><td class="val-red">R$ 1.270,50</td><td class="val-red">R$ 1.270,50</td><td class="val-red">R$ 1.448,38</td><td class="val-red">R$ 3.989,38</td></tr>
+        <tr><td>Tarifas Bancárias</td><td class="val-red">R$ 189,00</td><td class="val-red">R$ 189,00</td><td class="val-red">R$ 189,00</td><td class="val-red">R$ 567,00</td></tr>
+        <tr><td>Honorários Advocatícios</td><td class="val-red">R$ 3.000,00</td><td class="val-red">R$ 3.000,00</td><td class="val-red">R$ 3.000,00</td><td class="val-red">R$ 9.000,00</td></tr>
+        <tr><td>Honorários Contabilidade</td><td>—</td><td class="val-red">R$ 800,00</td><td class="val-red">R$ 800,00</td><td class="val-red">R$ 1.600,00</td></tr>
+        <tr><td>Serviços de Terceiros</td><td>—</td><td class="val-red">R$ 250,00</td><td>—</td><td class="val-red">R$ 250,00</td></tr>
+        <tr><td>Aplicação Financeira</td><td>—</td><td class="val-red">R$ 10.000,00</td><td>—</td><td class="val-red">R$ 10.000,00</td></tr>
+        <tr><td>⚠ Lançamentos a Identificar</td><td>—</td><td>—</td><td class="val-gold">R$ 1.344,54</td><td class="val-gold">R$ 1.344,54</td></tr>
+        <tr class="total-row"><td>(=) TOTAL DE DESPESAS</td><td class="val-red">R$ 35.858,33</td><td class="val-red">R$ 44.676,58</td><td class="val-red">R$ 35.381,59</td><td class="val-red">R$ 115.916,50</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="sec-header" style="margin-top:24px"><div class="bar"></div><h2>Resultado do Exercício</h2></div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Descrição</th><th>Jan/2026</th><th>Fev/2026</th><th>Mar/2026</th><th>Total Trim.</th></tr></thead>
+      <tbody>
+        <tr class="total-row"><td>SUPERÁVIT / (DÉFICIT) DO MÊS</td><td class="val-red">(R$ 1.678,25)</td><td class="val-red">(R$ 8.477,91)</td><td class="val-green">R$ 8.937,66</td><td class="val-red">(R$ 1.219,50)</td></tr>
+        <tr class="saldo-row"><td>Saldo Inicial (C/C)</td><td class="val-navy">R$ 21.489,34</td><td class="val-navy">R$ 19.811,09</td><td class="val-navy">R$ 10.503,99</td><td>—</td></tr>
+        <tr class="saldo-row"><td>Saldo Final (C/C)</td><td class="val-navy">R$ 19.811,09</td><td class="val-navy">R$ 11.333,18</td><td class="val-navy">R$ 19.441,65</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- CONCILIAÇÃO -->
+<div id="conciliacao" class="section">
+  <div class="month-selector">
+    <button class="month-btn active" onclick="setMonth('jan',this)">Janeiro 2026</button>
+    <button class="month-btn" onclick="setMonth('fev',this)">Fevereiro 2026</button>
+    <button class="month-btn" onclick="setMonth('mar',this)">Março 2026</button>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterTx('all',this)">Todos</button>
+    <button class="filter-btn green-f" onclick="filterTx('credit',this)">Créditos</button>
+    <button class="filter-btn red-f"   onclick="filterTx('debit',this)">Débitos</button>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr>
+        <th>Data</th>
+        <th style="text-align:left">Histórico</th>
+        <th style="text-align:left">Classificação</th>
+        <th>Débito</th><th>Crédito</th><th>Saldo</th>
+      </tr></thead>
+      <tbody id="conc-body"></tbody>
+    </table>
+  </div>
+  <div id="conc-summary" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px"></div>
+</div>
+
+<!-- DISPONIBILIDADES -->
+<div id="disponibilidades" class="section">
+  <div class="kpi-grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="kpi-card green">
+      <div class="kpi-label">Total Disponível Jan/26</div>
+      <div class="kpi-value">R$ 222.608,92</div>
+      <div class="kpi-sub">C/C + Poupança + Fundo</div>
+    </div>
+    <div class="kpi-card gold">
+      <div class="kpi-label">Total Disponível Fev/26</div>
+      <div class="kpi-value">R$ 226.205,06</div>
+      <div class="kpi-sub">C/C + Poupança + Fundo</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Total Disponível Mar/26</div>
+      <div class="kpi-value" style="color:var(--txt-light);font-size:13px">⚠ A informar</div>
+      <div class="kpi-sub">Saldos poupança/fundo pendentes</div>
+    </div>
+  </div>
+
+  <div class="sec-header"><div class="bar"></div><h2>Conta Corrente — CEF 1292.000577549848-4</h2></div>
+  <div class="disp-card">
+    <div class="disp-grid">
+      <div class="disp-item"><div class="disp-mes">Janeiro 2026</div><div class="disp-val">R$ 19.811,09</div></div>
+      <div class="disp-item"><div class="disp-mes">Fevereiro 2026</div><div class="disp-val">R$ 11.333,18</div></div>
+      <div class="disp-item"><div class="disp-mes">Março 2026</div><div class="disp-val">R$ 19.441,65</div></div>
+    </div>
+  </div>
+
+  <div class="sec-header" style="margin-top:20px"><div class="bar gold"></div><h2>Conta Poupança — CEF</h2></div>
+  <div class="disp-card">
+    <div class="disp-grid">
+      <div class="disp-item poupanca"><div class="disp-mes">31/01/2026</div><div class="disp-val">R$ 201.105,25</div></div>
+      <div class="disp-item poupanca"><div class="disp-mes">28/02/2026</div><div class="disp-val">R$ 203.155,32</div></div>
+      <div class="disp-item poupanca" style="opacity:.5"><div class="disp-mes">31/03/2026</div><div class="disp-val" style="color:var(--gold)">⚠ A informar</div></div>
+    </div>
+  </div>
+
+  <div class="sec-header" style="margin-top:20px"><div class="bar green"></div><h2>Fundo de Investimento — Caixa Fácil Renda Fixa Simples</h2></div>
+  <div class="disp-card">
+    <div class="disp-grid">
+      <div class="disp-item fundo">
+        <div class="disp-mes">31/01/2026</div>
+        <div class="disp-val">R$ 1.692,58</div>
+        <div style="font-size:10px;color:var(--txt-light);margin-top:4px">Rendimento: R$ 16,75</div>
+      </div>
+      <div class="disp-item fundo">
+        <div class="disp-mes">28/02/2026</div>
+        <div class="disp-val">R$ 11.716,56</div>
+        <div style="font-size:10px;color:var(--txt-light);margin-top:4px">Aporte: R$ 10.000,00</div>
+      </div>
+      <div class="disp-item fundo" style="opacity:.5">
+        <div class="disp-mes">31/03/2026</div>
+        <div class="disp-val" style="color:var(--gold)">⚠ A informar</div>
+        <div style="font-size:10px;color:var(--txt-light);margin-top:4px">Resgate: R$ 2.371,52</div>
+      </div>
+    </div>
+    <div class="disp-total-row" style="margin-top:14px">
+      <span class="disp-total-label">Total consolidado Jan/26</span>
+      <span class="disp-total-val">R$ 222.608,92</span>
+    </div>
+  </div>
+</div>
+
+<!-- NOTAS -->
+<div id="notas" class="section">
+  <div class="nota-card critico">
+    <div class="nota-header">
+      <span class="nota-badge nb-critico">Crítico</span>
+      <span class="nota-title">Lançamento não identificado — R$ 1.344,54</span>
+      <span class="nota-comp">Mar/2026</span>
+    </div>
+    <p class="nota-body">Débito de R$ 1.344,54 em 16/03/2026 (CASSIA PERPETUA) sem classificação contábil definida. Necessária documentação comprobatória e aprovação da diretoria para regularização antes do fechamento do trimestre.</p>
+  </div>
+  <div class="nota-card atencao">
+    <div class="nota-header">
+      <span class="nota-badge nb-atencao">Atenção</span>
+      <span class="nota-title">Retroativo Unimed em Janeiro/2026 — R$ 1.907,59</span>
+      <span class="nota-comp">Jan/2026</span>
+    </div>
+    <p class="nota-body">A fatura Unimed de Jan/26 inclui mensalidade retroativa de Nov/2025. Verificar se houve provisão no exercício anterior para garantir o correto regime de competência.</p>
+  </div>
+  <div class="nota-card atencao">
+    <div class="nota-header">
+      <span class="nota-badge nb-atencao">Atenção</span>
+      <span class="nota-title">Coparticipação Unimed Dez/2025 paga em Jan/2026 — R$ 301,85</span>
+      <span class="nota-comp">Jan/2026</span>
+    </div>
+    <p class="nota-body">Boleto referente a Dezembro/2025 liquidado em Janeiro/2026. Confirmar o registro na competência correta para evitar distorção no resultado do período.</p>
+  </div>
+  <div class="nota-card">
+    <div class="nota-header">
+      <span class="nota-badge nb-info">Informativo</span>
+      <span class="nota-title">Aplicação Financeira — Caixa Fácil Renda Fixa Simples</span>
+      <span class="nota-comp">Fev–Mar/2026</span>
+    </div>
+    <p class="nota-body">Aplicação de R$ 10.000,00 em Fev/2026. Saldo em Jan/26: R$ 1.692,58 com rendimento de R$ 16,75 (sujeito a IRRF). Resgate de R$ 2.371,52 em Mar/2026 — verificar tributação incidente sobre rendimentos acumulados.</p>
+  </div>
+  <div class="nota-card">
+    <div class="nota-header">
+      <span class="nota-badge nb-info">Informativo</span>
+      <span class="nota-title">Honorários Advocatícios — Parcelas 33, 34 e 35 de 36</span>
+      <span class="nota-comp">Jan–Mar/2026</span>
+    </div>
+    <p class="nota-body">Pagamentos mensais de R$ 3.000,00 a Ronaldo Mendes Sociedade Individual de Advocacia. A parcela final (36/36) é devida em Abril/2026. Recomendamos provisionar o valor no encerramento de Março.</p>
+  </div>
+  <div class="nota-card recomend">
+    <div class="nota-header">
+      <span class="nota-badge nb-recomend">Recomendação</span>
+      <span class="nota-title">Saldos de Março/2026 — Poupança e Fundo pendentes</span>
+      <span class="nota-comp">Mar/2026</span>
+    </div>
+    <p class="nota-body">Os saldos da conta poupança e do fundo de investimento referentes a 31/03/2026 não foram fornecidos. Solicitar os extratos para completar a posição de disponibilidades e encerrar o trimestre.</p>
+  </div>
+  <div class="nota-card recomend">
+    <div class="nota-header">
+      <span class="nota-badge nb-recomend">Recomendação</span>
+      <span class="nota-title">Implantação de Orçamento Mensal para próximos períodos</span>
+      <span class="nota-comp">Próx. Períodos</span>
+    </div>
+    <p class="nota-body">Sugerimos a criação de um orçamento mensal com metas de receita e limites de despesa por categoria, permitindo monitorar desvios em tempo real e apoiar decisões estratégicas da diretoria.</p>
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<footer class="footer">
+  NEX Assessoria Empresarial &nbsp;·&nbsp; Relatório Financeiro Gerencial &nbsp;·&nbsp; ASECAMUFS &nbsp;·&nbsp; 1º Trimestre 2026 &nbsp;·&nbsp; Documento Confidencial
+</footer>
+
+<script>
+const txData = {
+  jan: { saldo_ini: 21489.34, rows: [
+    ["02/01","MIRANICE MOREIRA","Contribuição Associado",0,3451.42],
+    ["05/01","MARIANA C FIGUIEIREDO","Aluguel – Sala 206",0,1674.00],
+    ["05/01","VALDOMIRO DOS SANTOS","Contribuição Associado",0,253.73],
+    ["05/01","EDVALDO DE JESUS","Contribuição Associado",0,44.86],
+    ["05/01","MARIO MARTINS ROCHA","Contribuição Associado",0,25.16],
+    ["05/01","ELENI GOMES MATOS","Contribuição Associado",0,3459.93],
+    ["05/01","CONDOMINIO MULTIPLACE","Condomínio",635.25,0],
+    ["05/01","CONDOMINIO MULTIPLACE","Condomínio",635.25,0],
+    ["05/01","ODONTOPREV S A","Copart. Odontosystem",501.41,0],
+    ["07/01","CAMILA P A FIGUEIRA","Aluguel – Sala 205",0,1682.10],
+    ["10/01","VALMIR LOPES PEREIRA","Contribuição Associado",0,3991.60],
+    ["12/01","UNIMED NACIONAL","Repasse Unimed",30142.69,0],
+    ["12/01","RONALDO MENDES","Honorários Advocatícios",3000.00,0],
+    ["14/01","DEPOSITO LOTERICO","Outros Recebimentos",0,1555.57],
+    ["22/01","CAMARA MUNICIPAL","Repasse Câmara Municipal",0,14778.54],
+    ["22/01","CAMARA MUNICIPAL","Repasse Câmara Municipal",0,2172.25],
+    ["22/01","UNIMED NACIONAL","Copart. Unimed",301.85,0],
+    ["26/01","MENSALIDADE CESTA SERV","Tarifa Bancária",189.00,0],
+    ["28/01","VILMA FERREIRA ALVES","Contribuição Associado",0,829.19],
+    ["29/01","COOP TRAB ODONTO","Repasse Uniodonto",452.88,0],
+    ["30/01","EUNIRA PINHEIRO XAVES","Contribuição Associado",0,82.29],
+    ["30/01","VERANA NEVES PORTO","Contribuição Associado",0,44.86],
+    ["30/01","MARCOS ANTONIO","Contribuição Associado",0,134.58],
+  ]},
+  fev: { saldo_ini: 19811.09, rows: [
+    ["02/02","CLEONICE MOREIRA","Contribuição Associado",0,3259.69],
+    ["02/02","MARIANA C FIGUIEIREDO","Aluguel – Sala 206",0,1674.00],
+    ["02/02","VALDOMIRO DOS SANTOS","Contribuição Associado",0,253.73],
+    ["02/02","NILTON SERGIO RIBEIRO","Contribuição Associado",0,2152.60],
+    ["03/02","ELENI GOMES MATOS","Contribuição Associado",0,3518.28],
+    ["03/02","JOANA ANGELICA LOPES","Contribuição Associado",0,2292.72],
+    ["03/02","CONDOMINIO MULTIPLACE","Condomínio",635.25,0],
+    ["03/02","CONDOMINIO MULTIPLACE","Condomínio",635.25,0],
+    ["04/02","EDSON LIMA COSTA","Serviços de Terceiros",250.00,0],
+    ["06/02","CAMILA P A FIGUEIRA","Aluguel – Sala 205",0,1682.10],
+    ["06/02","AUT INST DE PREV","Cobrança Inativos",0,209.36],
+    ["07/02","DEP DINHEIRO CORBAN","Outros Recebimentos",0,1555.57],
+    ["09/02","UNIMED NACIONAL","Repasse Unimed",28235.10,0],
+    ["10/02","VALMIR LOPES PEREIRA","Contribuição Associado",0,2084.01],
+    ["10/02","RONALDO MENDES","Honorários Advocatícios",3000.00,0],
+    ["11/02","EDVALDO DE JESUS","Contribuição Associado",0,44.86],
+    ["12/02","UNIMED NACIONAL","Copart. Unimed",479.10,0],
+    ["24/02","CAMARA MUNICIPAL","Repasse Câmara Municipal",0,14290.87],
+    ["24/02","CAMARA MUNICIPAL","Repasse Câmara Municipal",0,2172.25],
+    ["25/02","MENSALIDADE CESTA SERV","Tarifa Bancária",189.00,0],
+    ["25/02","MARCOS ANTONIO","Contribuição Associado",0,134.58],
+    ["25/02","MATHEUS VITOR OLIVEIRA","Honorários Contabilidade",800.00,0],
+    ["25/02","APLICACAO FDO CLIENTE","Aplicação Financeira",10000.00,0],
+    ["25/02","COOP TRAB ODONTO","Repasse Uniodonto",452.88,0],
+    ["27/02","VERANA NEVES PORTO","Contribuição Associado",0,44.86],
+    ["28/02","VILMA FERREIRA ALVES","Contribuição Associado",0,829.19],
+  ]},
+  mar: { saldo_ini: 10503.99, rows: [
+    ["01/03","EUNIRA PINHEIRO XAVES","Contribuição Associado",0,82.24],
+    ["02/03","MIRANICE MOREIRA","Contribuição Associado",0,3212.12],
+    ["02/03","JOANA ANGELICA LOPES","Contribuição Associado",0,2128.87],
+    ["02/03","NILTON SERGIO RIBEIRO","Contribuição Associado",0,2084.01],
+    ["02/03","MARIANA C FIGUIEIREDO","Aluguel – Sala 206",0,1762.94],
+    ["02/03","VALDOMIRO DOS SANTOS","Contribuição Associado",0,253.73],
+    ["02/03","EDVALDO DE JESUS","Contribuição Associado",0,44.86],
+    ["02/03","CONDOMINIO MULTIPLACE","Condomínio",724.19,0],
+    ["02/03","CONDOMINIO MULTIPLACE","Condomínio",724.19,0],
+    ["04/03","DEPOSITO LOTERICO","Outros Recebimentos",0,1555.57],
+    ["04/03","ELENI GOMES MATOS","Contribuição Associado",0,3427.70],
+    ["04/03","ODONTOPREV S A","Copart. Odontosystem",466.83,0],
+    ["06/03","CAMILA P A FIGUEIRA","Aluguel – Sala 205",0,1771.04],
+    ["09/03","AUT INST DE PREV","Cobrança Inativos",0,209.36],
+    ["09/03","UNIMED NACIONAL","Repasse Unimed",25321.93,0],
+    ["09/03","RONALDO MENDES","Honorários Advocatícios",3000.00,0],
+    ["10/03","RESGATE APLICACAO","Resgate Aplic. Financeira",0,2371.52],
+    ["10/03","VALMIR LOPES PEREIRA","Contribuição Associado",0,2215.42],
+    ["16/03","CASSIA PERPETUA","⚠ A Identificar",1344.54,0],
+    ["23/03","CAMARA MUNICIPAL","Repasse Câmara Municipal",0,12623.34],
+    ["23/03","CAMARA MUNICIPAL","Repasse Câmara Municipal",0,2147.48],
+    ["23/03","MATHEUS VITOR OLIVEIRA","Honorários Contabilidade",800.00,0],
+    ["25/03","MENSALIDADE CESTA SERV","Tarifa Bancária",189.00,0],
+    ["25/03","UNIMED NACIONAL","Copart. Unimed",1869.33,0],
+    ["25/03","COOP TRAB ODONTO","Repasse Uniodonto",452.88,0],
+    ["26/03","ODONTOPREV S A","Copart. Odontosystem",488.70,0],
+    ["30/03","JOANA ANGELICA LOPES","Contribuição Associado",0,2128.87],
+    ["31/03","CLEONICE MOREIRA","Contribuição Associado",0,3312.12],
+    ["31/03","VILMA FERREIRA ALVES","Contribuição Associado",0,859.00],
+    ["31/03","VILMA FERREIRA ALVES","Contribuição Associado",0,0.19],
+    ["31/03","NILTON SERGIO RIBEIRO","Contribuição Associado",0,2084.01],
+    ["31/03","VERANA NEVES PORTO","Contribuição Associado",0,44.86],
+  ]}
+};
+
+let currentMonth = 'jan', currentFilter = 'all';
+
+function fmt(v) {
+  if (v === 0) return '—';
+  return 'R$ ' + v.toFixed(2).replace('.',',').replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+}
+
+function renderConc() {
+  const d = txData[currentMonth];
+  let saldo = d.saldo_ini;
+  const iniDate = currentMonth==='jan'?'01/01':currentMonth==='fev'?'01/02':'01/03';
+  let html = `<tr class="saldo-row"><td>${iniDate}</td><td colspan="2" style="text-align:left;font-weight:600">SALDO ANTERIOR</td><td>—</td><td>—</td><td class="val-navy">${fmt(saldo)}</td></tr>`;
+  let totDeb=0, totCred=0;
+  d.rows.forEach(r => {
+    const [dt,hist,cl,deb,cred] = r;
+    saldo += cred - deb; totDeb += deb; totCred += cred;
+    const isDebit = deb > 0, isWarn = cl.includes('⚠');
+    if (currentFilter==='credit' && isDebit) return;
+    if (currentFilter==='debit'  && !isDebit) return;
+    html += `<tr>
+      <td>${dt}</td>
+      <td style="text-align:left;max-width:170px;overflow:hidden;text-overflow:ellipsis">${hist}</td>
+      <td style="text-align:left">
+        <span class="tag ${isWarn?'tag-warn':isDebit?'tag-debit':'tag-credit'}">${isWarn?'Alerta':isDebit?'D':'C'}</span>
+        <span style="margin-left:6px;font-size:11px;color:var(--txt-mid)">${cl}</span>
+      </td>
+      <td class="${deb>0?'val-red':''}">${fmt(deb)}</td>
+      <td class="${cred>0?'val-green':''}">${fmt(cred)}</td>
+      <td class="${saldo>=0?'val-navy':'val-red'}">${fmt(saldo)}</td>
+    </tr>`;
+  });
+  html += `<tr class="total-row"><td colspan="3">TOTAIS DO PERÍODO</td><td class="val-red">${fmt(totDeb)}</td><td class="val-green">${fmt(totCred)}</td><td class="val-navy">${fmt(saldo)}</td></tr>`;
+  document.getElementById('conc-body').innerHTML = html;
+  const res = totCred - totDeb;
+  document.getElementById('conc-summary').innerHTML = `
+    <div class="kpi-card green" style="margin:0"><div class="kpi-label">Receitas</div><div class="kpi-value">${fmt(totCred)}</div></div>
+    <div class="kpi-card red"   style="margin:0"><div class="kpi-label">Despesas</div><div class="kpi-value">${fmt(totDeb)}</div></div>
+    <div class="kpi-card ${res>=0?'green':'red'}" style="margin:0"><div class="kpi-label">Resultado</div><div class="kpi-value">${fmt(res)}</div></div>`;
+}
+
+function setMonth(m, btn) {
+  currentMonth = m;
+  document.querySelectorAll('.month-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderConc();
+}
+
+function filterTx(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderConc();
+}
+
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  ['dashboard','drg','conciliacao','disponibilidades','notas'].forEach((s,i)=>{
+    if(s===id) document.querySelectorAll('.nav-tab')[i].classList.add('active');
+  });
+  if (id==='conciliacao') renderConc();
+}
+
+function buildBarChart() {
+  const data = [
+    {label:'Janeiro',  rec:34180.08, desp:35858.33},
+    {label:'Fevereiro',rec:36198.67, desp:44676.58},
+    {label:'Março',    rec:44319.25, desp:35381.59},
+  ];
+  const max = 50000;
+  let html = '';
+  data.forEach(d => {
+    const rp=(d.rec/max*100).toFixed(1), dp=(d.desp/max*100).toFixed(1);
+    html += `<div class="bar-group">
+      <div class="bar-label"><span style="font-weight:600">${d.label}</span></div>
+      <div style="margin-bottom:4px">
+        <div style="font-size:9px;color:var(--green);margin-bottom:2px">Receitas</div>
+        <div class="bar-track"><div class="bar-fill bar-rec" style="width:0%" data-target="${rp}">
+          <span class="bar-fill-val">${fmt(d.rec)}</span>
+        </div></div>
+      </div>
+      <div>
+        <div style="font-size:9px;color:var(--red);margin-bottom:2px">Despesas</div>
+        <div class="bar-track"><div class="bar-fill bar-desp" style="width:0%" data-target="${dp}">
+          <span class="bar-fill-val">${fmt(d.desp)}</span>
+        </div></div>
+      </div>
+    </div>`;
+  });
+  document.getElementById('bar-chart').innerHTML = html;
+  requestAnimationFrame(()=>{
+    document.querySelectorAll('.bar-fill[data-target]').forEach(el=>{
+      el.style.width = el.dataset.target + '%';
+    });
+  });
+}
+
+function buildDonut() {
+  const cats = [
+    {label:'Plano Unimed',   val:83699.72,color:'#8b1a1a'},
+    {label:'Copart. Unimed', val:2650.28, color:'#c44444'},
+    {label:'Uniodonto',      val:1358.64, color:'#1a3d8a'},
+    {label:'Copart. Odonto', val:1456.94, color:'#2a5ac4'},
+    {label:'Condomínio',     val:3989.38, color:'#c49a1a'},
+    {label:'Honorários',     val:10850.00,color:'#1a6b3a'},
+    {label:'Outros',         val:11911.54,color:'#6a80a8'},
+  ];
+  const total = cats.reduce((s,c)=>s+c.val,0);
+  const cx=55,cy=55,r=42,inner=26;
+  let angle=-Math.PI/2, paths='';
+  cats.forEach(cat=>{
+    const slice=(cat.val/total)*2*Math.PI;
+    const x1=cx+r*Math.cos(angle),y1=cy+r*Math.sin(angle);
+    const x2=cx+r*Math.cos(angle+slice),y2=cy+r*Math.sin(angle+slice);
+    const xi1=cx+inner*Math.cos(angle),yi1=cy+inner*Math.sin(angle);
+    const xi2=cx+inner*Math.cos(angle+slice),yi2=cy+inner*Math.sin(angle+slice);
+    const large=slice>Math.PI?1:0;
+    paths+=`<path d="M${xi1},${yi1} L${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} L${xi2},${yi2} A${inner},${inner} 0 ${large},0 ${xi1},${yi1}" fill="${cat.color}" stroke="white" stroke-width="1.5"/>`;
+    angle+=slice;
+  });
+  paths+=`<circle cx="${cx}" cy="${cy}" r="${inner-1}" fill="white"/>
+    <text x="${cx}" y="${cy-5}"  text-anchor="middle" font-size="9"  fill="#0e2a6c" font-family="monospace" font-weight="600">Total</text>
+    <text x="${cx}" y="${cy+8}" text-anchor="middle" font-size="7.5" fill="#3a4e70" font-family="monospace">R$115,9k</text>`;
+  document.getElementById('donut-svg').innerHTML = paths;
+  let leg='';
+  cats.forEach(cat=>{
+    const pct=(cat.val/total*100).toFixed(1);
+    leg+=`<div class="legend-item">
+      <div class="legend-dot" style="background:${cat.color}"></div>
+      <span class="legend-label">${cat.label}</span>
+      <span class="legend-val" style="color:${cat.color}">${pct}%</span>
+    </div>`;
+  });
+  document.getElementById('donut-legend').innerHTML = leg;
+}
+
+buildBarChart();
+buildDonut();
+renderConc();
+</script>
+</body>
+</html>
